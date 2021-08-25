@@ -25,7 +25,9 @@ SECRET_KEY = '(imy+#86as28!k5qozyot0vs8l4q@5+gl2t30_t%j=!ey$_dls'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["a02317332-12.bluezone.usu.edu"]
+
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'viewer'
 ]
 
 MIDDLEWARE = [
