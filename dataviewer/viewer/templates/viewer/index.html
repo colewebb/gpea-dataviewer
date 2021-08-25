@@ -4,6 +4,32 @@
         <title>GC #1 @ USU CPL</title>
     </head>
     <body>
-        <img src="{% static 'viewer/a.png' %}">
+        <script>
+            $(document).ready(function(){
+               setInterval(function(){ reload_page(); },60*60000);
+            });
+            function reload_page() {
+               window.location.reload(true);
+            }
+        </script>
+        <table>
+            <tr>
+                <td>
+                    <img src="{% static 'viewer/a.png' %}">
+                </td>
+                <td>
+                    <img src="{% static 'viewer/b.png' %}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{% static 'viewer/c.png' %}">
+                </td>
+                <td>
+                    <img src="{% static 'viewer/d.png' %}">
+                </td>
+            </tr>
+        </table>
+        <p>Data last updated at {{ time }} (server time)</p>
     </body>
 </html>
