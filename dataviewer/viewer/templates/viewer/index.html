@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>GC #1 @ USU CPL</title>
+        <link rel="stylesheet" href="{% static 'viewer/styles.css' %}">
     </head>
     <body>
         <script>
@@ -12,21 +13,22 @@
                window.location.reload(true);
             }
         </script>
-        <table>
+        <h3>Growth Chamber #1 Graphs</h3>
+        <table id="graphs">
             <tr>
-                <td>
-                    <img src="{% static 'viewer/a.png' %}">
+                <td class="graph">
+                    <img src="{% static 'viewer/a.png' %}" width="500px">
                 </td>
-                <td>
-                    <img src="{% static 'viewer/b.png' %}">
+                <td class="graph">
+                    <img src="{% static 'viewer/b.png' %}" width="500px">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <img src="{% static 'viewer/c.png' %}">
+                <td class="graph">
+                    <img src="{% static 'viewer/c.png' %}" width="500px">
                 </td>
-                <td>
-                    <img src="{% static 'viewer/d.png' %}">
+                <td class="graph">
+                    <img src="{% static 'viewer/d.png' %}" width="500px">
                 </td>
             </tr>
         </table>
