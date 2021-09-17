@@ -25,7 +25,7 @@ SECRET_KEY = '(imy+#86as28!k5qozyot0vs8l4q@5+gl2t30_t%j=!ey$_dls'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["a02317332-12.bluezone.usu.edu", "localhost"]
+ALLOWED_HOSTS = ["a02317332-12.bluezone.usu.edu", "a00017051-117.bluezone.usu.edu", "localhost"]
 
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 

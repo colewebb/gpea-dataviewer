@@ -30,7 +30,7 @@ def index(request):
     chdir("/home/pi/pics")
     data = pd.read_csv("./data.csv",delimiter=",", header=0, engine='python')
     chdir("/home/pi/dataviewer/dataviewer/viewer/static/viewer")
-    startOfData = 60
+    startOfData = 0
     pyplot.plot(countingSequence(len(data[startOfData:len(data)])), data['Daily RGR'][startOfData:len(data)], color='red')
     pyplot.xlabel("Time (hours)")
     pyplot.ylabel("Daily RGR (New pixels per old pixel per day)")
