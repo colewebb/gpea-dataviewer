@@ -28,7 +28,7 @@ def countingSequence(n):
 
 def index(request):
     chdir("/home/pi/pics")
-    data = pd.read_csv("./data.csv",delimiter=", ", header=0, engine='python')
+    data = pd.read_csv("./data.csv",delimiter=",", header=0, engine='python')
     chdir("/home/pi/dataviewer/dataviewer/viewer/static/viewer")
     startOfData = 60
     pyplot.plot(countingSequence(len(data[startOfData:len(data)])), data['Daily RGR'][startOfData:len(data)], color='red')
