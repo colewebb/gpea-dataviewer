@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
-from os import chdir
+from os import chdir, listdir, path
 from datetime import datetime
 from matplotlib import pyplot
 import pandas as pd
 import numpy as np
+import cv2 as cv
 
 def rollingAverage(n, data):
     return np.convolve(data, np.ones(n), 'valid')/n
@@ -24,13 +25,18 @@ def countingSequence(n):
         toReturn.append(i + 1)
     return toReturn
 
-# Create your views here.
-
 def index(request):
     chdir("/home/pi/pics")
     data = pd.read_csv("./data.csv",delimiter=",", header=0, engine='python')
+    fileList = listdir("./")
+    pngs = []
+    for i in fileList:
+        if i.endswith(".png"):
+            pngs.append(i)
+    newestFile = max(pngs, key=path.getctime)
+    img = cv.imread(newestFile)
     chdir("/home/pi/dataviewer/dataviewer/viewer/static/viewer")
-    startOfData = 60
+    startOfData = 7
     pyplot.plot(countingSequence(len(data[startOfData:len(data)])), data['Daily RGR'][startOfData:len(data)], color='red')
     pyplot.xlabel("Time (hours)")
     pyplot.ylabel("Daily RGR (New pixels per old pixel per day)")
@@ -44,12 +50,13 @@ def index(request):
     pyplot.title("RGR for the past 24 hours, recorded hourly, 3-point rolling average")
     pyplot.savefig("./b.png")
     pyplot.cla()
-    highNumber = 10
-    rollingHigh = rollingAverage(highNumber, data['Daily RGR'][startOfData:len(data)])
-    pyplot.plot(rollingHigh, color='red')
-    pyplot.xlabel("Time (hours)")
-    pyplot.ylabel("Daily RGR (New pixels per old pixel per day)")
-    pyplot.title("RGR for the past 24 hours, recorded hourly, " + str(highNumber) + "-point rolling average")
+    img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    selectedValue, thresholded = cv.threshold(img, 0, 1, cv.THRESH_OTSU)
+    hist = cv.calcHist([img], [0], None, [256], [0, 256])
+    pyplot.plot(hist, color="k")
+    pyplot.xlabel("Pixel intensity")
+    pyplot.ylabel("Pixel count")
+    pyplot.title("Latest histogram")
     pyplot.savefig("./c.png")
     pyplot.cla()
     daily = dailyAverage(data['Daily RGR'][startOfData:len(data)])
@@ -60,5 +67,4 @@ def index(request):
     pyplot.title("RGR for the past 24 hours, recorded every hour, averaged every 24 hours")
     pyplot.savefig("./d.png")
     pyplot.cla()
-    return render(request, 'viewer/index.html', {'time': str(datetime.now())})
-    return HttpResponse("<img src='./static/viewer/a.png'>")
+    return render(request, 'viewer/index.html', {'time': str(datetime.now()), 'selectedValue': selectedValue})
