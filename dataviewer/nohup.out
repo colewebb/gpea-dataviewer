@@ -1,0 +1,61 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+September 17, 2021 - 23:17:37
+Django version 3.2.6, using settings 'dataviewer.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Invalid HTTP_HOST header: 'a00017051-117.bluezone.usu.edu:8000'. You may need to add 'a00017051-117.bluezone.usu.edu' to ALLOWED_HOSTS.
+Bad Request: /index/
+[17/Sep/2021 23:17:43] "GET /index/ HTTP/1.1" 400 62998
+Invalid HTTP_HOST header: 'a00017051-117.bluezone.usu.edu:8000'. You may need to add 'a00017051-117.bluezone.usu.edu' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+[17/Sep/2021 23:17:43] "GET /favicon.ico HTTP/1.1" 400 63023
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+September 17, 2021 - 23:19:43
+Django version 3.2.6, using settings 'dataviewer.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Internal Server Error: /index/
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/pi/.local/lib/python3.7/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pi/dataviewer/dataviewer/viewer/views.py", line 40, in index
+    rolling3Hourly = rollingAverage(3, data['Daily RGR'][startOfData:len(data)])
+  File "/home/pi/dataviewer/dataviewer/viewer/views.py", line 12, in rollingAverage
+    return np.convolve(data, np.ones(n), 'valid')/n
+  File "<__array_function__ internals>", line 6, in convolve
+  File "/home/pi/.local/lib/python3.7/site-packages/numpy/core/numeric.py", line 843, in convolve
+    raise ValueError('v cannot be empty')
+ValueError: v cannot be empty
+[17/Sep/2021 23:19:45] "GET /index/ HTTP/1.1" 500 69901
+/home/pi/dataviewer/dataviewer/viewer/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+September 17, 2021 - 23:20:45
+Django version 3.2.6, using settings 'dataviewer.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+[17/Sep/2021 23:20:48] "GET /index/ HTTP/1.1" 200 1249
+[17/Sep/2021 23:20:48] "GET /static/viewer/styles.css HTTP/1.1" 200 99
+[17/Sep/2021 23:20:48] "GET /static/viewer/d.png HTTP/1.1" 200 25534
+[17/Sep/2021 23:20:48] "GET /static/viewer/a.png HTTP/1.1" 200 29310
+[17/Sep/2021 23:20:48] "GET /static/viewer/c.png HTTP/1.1" 200 31028
+[17/Sep/2021 23:20:48] "GET /static/viewer/b.png HTTP/1.1" 200 34794
