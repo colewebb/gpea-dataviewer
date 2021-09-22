@@ -82,4 +82,12 @@ def index(request):
     pyplot.title("Derivative of hourly pixel count")
     pyplot.savefig("./e.png")
     pyplot.cla()
+    doi = data['Current White Pixels'][startOfData:len(data)]
+    sequence = countingSequence(len(doi))
+    pyplot.plot(sequence, doi, color='red')
+    pyplot.xlabel("Time (hours)")
+    pyplot.ylabel("White pixels counted")
+    pyplot.title("Counts of white pixels per hour")
+    pyplot.savefig("./f.png")
+    pyplot.cla()
     return render(request, 'viewer/index.html', {'time': str(datetime.now()), 'selectedValue': selectedValue})
