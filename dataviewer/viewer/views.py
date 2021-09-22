@@ -25,6 +25,12 @@ def countingSequence(n):
         toReturn.append(i + 1)
     return toReturn
 
+def integral(data, step=1):
+    toReturn = []
+    for i in range(0, len(data) - 1):
+        toReturn.append(float(data[i + 1] - data[i])/step)
+    return toReturn
+
 def index(request):
     chdir("/home/pi/pics")
     data = pd.read_csv("./data.csv",delimiter=",", header=0, engine='python')
@@ -66,5 +72,14 @@ def index(request):
     pyplot.ylabel("Daily RGR (New pixels per old pixel per day)")
     pyplot.title("RGR for the past 24 hours, recorded every hour, averaged every 24 hours")
     pyplot.savefig("./d.png")
+    pyplot.cla()
+    doi = data['Current White Pixels'][startOfData:len(data)].tolist()
+    integration = integral(doi)
+    sequence = countingSequence(len(doi))
+    pyplot.plot(sequence, integration, color="red")
+    pyplot.xlabel("Time (hours)")
+    pyplot.ylabel("Pixel derivative")
+    pyplot.title("Derivative of hourly pixel count")
+    pyplot.savefig("./e.png")
     pyplot.cla()
     return render(request, 'viewer/index.html', {'time': str(datetime.now()), 'selectedValue': selectedValue})
