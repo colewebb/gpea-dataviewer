@@ -75,7 +75,7 @@ def index(request):
     pyplot.cla()
     doi = data['Current White Pixels'][startOfData:len(data)].tolist()
     integration = integral(doi)
-    sequence = countingSequence(len(doi))
+    sequence = countingSequence(len(integration))
     pyplot.plot(sequence, integration, color="red")
     pyplot.xlabel("Time (hours)")
     pyplot.ylabel("Pixel derivative")
